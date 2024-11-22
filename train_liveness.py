@@ -100,7 +100,7 @@ print(classification_report(testY.argmax(axis=1),
 
 # save the network to disk
 print("[INFO] serializing network to '{}'...".format(args["model"]))
-model.save(args["model"])
+model.save("model", save_format="tflite")
 
 # save the label encoder to disk
 f = open(args["le"], "wb")
