@@ -6,13 +6,13 @@ import matplotlib
 matplotlib.use("Agg")
 
 # import the necessary packages
-from pyimagesearch.livenessnet import LivenessNet
+from pyimagesearch.livenessnet import LivenessNet  # Ensure this is from your local implementation or module
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
-from keras.preprocessing.image import ImageDataGenerator
+from keras.src.legacy.preprocessing.image import ImageDataGenerator
 from keras.optimizers import Adam
-from keras.src.utils import np_utils
+from keras.utils import to_categorical
 from imutils import paths
 import matplotlib.pyplot as plt
 import numpy as np
@@ -66,7 +66,7 @@ data = np.array(data, dtype="float") / 255.0
 # one-hot encode them
 le = LabelEncoder()
 labels = le.fit_transform(labels)
-labels = np_utils.to_categorical(labels, 2)
+labels = to_categorical(labels, 2)
 
 # partition the data into training and testing splits using 75% of
 # the data for training and the remaining 25% for testing
@@ -88,7 +88,7 @@ model.compile(loss="binary_crossentropy", optimizer=opt,
 
 # train the network
 print("[INFO] training network for {} epochs...".format(EPOCHS))
-H = model.fit_generator(aug.flow(trainX, trainY, batch_size=BS),
+H = model.fit(aug.flow(trainX, trainY, batch_size=BS),
 	validation_data=(testX, testY), steps_per_epoch=len(trainX) // BS,
 	epochs=EPOCHS)
 

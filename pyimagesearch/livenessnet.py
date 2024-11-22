@@ -1,7 +1,7 @@
 # import the necessary packages
-from keras.src.layers.core import Flatten
-from keras.src.layers.core import Dropout
-from keras.src.layers.core import Dense
+from keras.layers import Flatten
+from keras.layers import Dropout
+from keras.layers import Dense
 from keras.models import Model
 from keras.applications.resnet50 import ResNet50
 
